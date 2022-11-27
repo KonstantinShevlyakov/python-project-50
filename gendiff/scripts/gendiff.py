@@ -1,2 +1,8 @@
 #!usr/bin/env python3
-print('Lol')
+import argparse
+def main():
+    print('Lol')
+
+
+if __name__ == '__main__':
+    main()
