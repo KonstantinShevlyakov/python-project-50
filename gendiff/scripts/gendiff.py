@@ -8,6 +8,28 @@ def main():
     parser.add_argument('second_file', type=str)
     parser.add_argument('-f', '--format', type=str, default='json', help='set format of output')
     args = parser.parse_args()
+    print(generate_diff(**args))
+
+
+def generate_diff(f1, f2):
+    def get_key(elem):
+        return elem[0]
+
+    result = ''
+    union_dict = dict(f1, **f2)
+    sorted_dict = sorted(union_dict, key=get_key)
+    for k in sorted_dict:
+        if k in f1 and k in f2:
+            if f1[k] == f2[k]:
+                result += f'\t{k}: {f1[k]}\n'
+            else:
+                result += f'\t- {k}: {f1[k]}\n'
+                result += f'\t+ {k}: {f2[k]}\n'
+        elif k in f1 and k not in f2:
+            result += f'\t- {k}: {f1[k]}\n'
+        elif k not in f1 and k in f2:
+            result += f'\t+ {k}: {f2[k]}\n'
+    return '{\n' + result + '}'
 
 
 if __name__ == '__main__':
