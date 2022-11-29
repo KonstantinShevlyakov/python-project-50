@@ -1,5 +1,6 @@
 #!usr/bin/env python3
 import argparse
+import json
 
 
 def main():
@@ -8,13 +9,15 @@ def main():
     parser.add_argument('second_file', type=str)
     parser.add_argument('-f', '--format', type=str, default='json', help='set format of output')
     args = parser.parse_args()
-    print(generate_diff(**args))
+    print(generate_diff(args.first_file, args.second_file))
 
 
 def generate_diff(f1, f2):
     def get_key(elem):
         return elem[0]
 
+    f1 = json.load(open(f1))
+    f2 = json.load(open(f2))
     result = ''
     union_dict = dict(f1, **f2)
     sorted_dict = sorted(union_dict, key=get_key)
