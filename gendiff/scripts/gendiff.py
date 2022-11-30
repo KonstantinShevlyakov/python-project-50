@@ -24,7 +24,7 @@ def generate_diff(f1, f2):
     for k in sorted_dict:
         if k in f1 and k in f2:
             if f1[k] == f2[k]:
-                result += f'\t{k}: {f1[k]}\n'
+                result += f'\t  {k}: {f1[k]}\n'
             else:
                 result += f'\t- {k}: {f1[k]}\n'
                 result += f'\t+ {k}: {f2[k]}\n'
