@@ -18,5 +18,3 @@ def test_generate_diff_json():
 def test_generate_diff_yaml():
     assert generate_diff(file_yaml1, file_yaml2) == result
     assert generate_diff(file_yml1, file_yml2) == result
-
-
