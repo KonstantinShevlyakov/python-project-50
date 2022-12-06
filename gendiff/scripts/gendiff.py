@@ -1,6 +1,6 @@
 #!usr/bin/env python3
 import argparse
-import json
+import gendiff.scripts.parser as parser
 
 
 def main():
@@ -24,8 +24,8 @@ def generate_diff(f1, f2):
     def get_key(elem):
         return elem[0]
 
-    f1 = json.load(open(f1))
-    f2 = json.load(open(f2))
+    f1 = parser.parse_file(f1)
+    f2 = parser.parse_file(f2)
     result = ''
     union_dict = dict(f1, **f2)
     sorted_dict = sorted(union_dict, key=get_key)
