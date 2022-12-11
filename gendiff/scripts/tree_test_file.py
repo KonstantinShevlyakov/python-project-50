@@ -5,13 +5,12 @@ FIRST_FILE = json.load(open('tests/fixtures/file100.json'))
 SECOND_FILE = json.load(open('tests/fixtures/file200.json'))
 
 
-def diff_dicts(d1, d2, result=None):
+def diff_dicts(d1, d2):
 
     def get_key(elem):
         return elem
 
-    if result is None:
-        result = {}
+    result = {}
 
     unique_keys = d1.keys() | d2.keys()
     sorted_keys = sorted(unique_keys, key=get_key)
