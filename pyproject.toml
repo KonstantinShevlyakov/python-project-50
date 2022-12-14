@@ -9,6 +9,7 @@ packages = [{include = "gendiff"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 hexlet-immutable-fs-trees = "^0.1.8"
+env = "^0.1.0"
 
 [tool.poetry.scripts]
 gendiff = "gendiff.scripts.gendiff:main"
