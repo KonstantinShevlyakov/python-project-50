@@ -28,7 +28,8 @@ def build_representation(d1, d2):
                 if isinstance(d1[k], dict) and isinstance(d2[k], dict):
                     result[k] = ('changed', build_representation(d1[k], d2[k]))
                 else:
-                    result[k] = ('two_values', primitive_stringify(d1[k]), primitive_stringify(d2[k]))
+                    result[k] = ('two_values', primitive_stringify(d1[k]),
+                                 primitive_stringify(d2[k]))
             else:
                 result[k] = ('saved', primitive_stringify(d1[k]))
     return result
