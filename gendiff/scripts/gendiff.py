@@ -4,6 +4,7 @@ import gendiff.scripts.parser as file_parser
 import gendiff.scripts.builder as builder
 import gendiff.scripts.stylish as stylish
 
+
 def main():
     parser = argparse.ArgumentParser(
         description='Compares two configuration files and shows a difference.'
@@ -22,14 +23,12 @@ def main():
 
 
 def generate_diff(f1, f2):
-    def get_key(elem):
-        return elem[0]
 
     f1 = file_parser.parse_file(f1)
     f2 = file_parser.parse_file(f2)
 
-    representation = builder(f1, f2)
-    return stylish(representation)
+    representation = builder.build_representation(f1, f2)
+    return stylish.stylish(representation)
 
     # result = ''
     # union_dict = dict(f1, **f2)
