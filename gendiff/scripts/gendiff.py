@@ -24,14 +24,14 @@ def main():
     print(generate_diff(args.first_file, args.second_file, args.format))
 
 
-def generate_diff(f1, f2, format='stylish'):
+def generate_diff(f1, f2, formatter='stylish'):
 
     f1 = file_parser.parse_file(f1)
     f2 = file_parser.parse_file(f2)
-    representation = builder.build_representation(f1, f2, format)
-    if format == 'json':
+    representation = builder.build_representation(f1, f2, formatter)
+    if formatter == 'json':
         return json.json_formatter(representation)
-    elif format == 'plain':
+    elif formatter == 'plain':
         return plain.plain(representation)
     else:
         return stylish.stylish(representation)

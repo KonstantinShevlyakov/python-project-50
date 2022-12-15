@@ -42,9 +42,12 @@ def build_representation(d1, d2, format):
         if k in d1.keys() and k in d2.keys():
             if d1[k] != d2[k]:
                 if isinstance(d1[k], dict) and isinstance(d2[k], dict):
-                    result[k] = ('changed', build_representation(d1[k], d2[k], format))
+                    result[k] = (
+                        'changed', build_representation(d1[k], d2[k], format)
+                    )
                 else:
-                    result[k] = ('two_values', primitive_stringify(d1[k], format),
+                    result[k] = ('two_values',
+                                 primitive_stringify(d1[k], format),
                                  primitive_stringify(d2[k], format))
             else:
                 result[k] = ('saved', primitive_stringify(d1[k], format))
