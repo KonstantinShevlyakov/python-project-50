@@ -26,7 +26,6 @@ def generate_diff(f1, f2, format='stylish'):
 
     f1 = file_parser.parse_file(f1)
     f2 = file_parser.parse_file(f2)
-
     representation = builder.build_representation(f1, f2)
     return stylish.stylish(representation)
 
