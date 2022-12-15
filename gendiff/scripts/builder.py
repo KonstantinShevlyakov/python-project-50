@@ -10,6 +10,8 @@ def primitive_stringify(value):
         return 'false'
     elif value is None:
         return 'null'
+    elif value == '':
+        return ''
     else:
         return str(value)
 
