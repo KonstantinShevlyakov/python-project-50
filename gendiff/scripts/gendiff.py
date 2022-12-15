@@ -4,6 +4,7 @@ import gendiff.scripts.parser as file_parser
 import gendiff.scripts.builder as builder
 import gendiff.formatters.stylish as stylish
 import gendiff.formatters.plain as plain
+import gendiff.formatters.json as json
 
 
 def main():
@@ -28,10 +29,12 @@ def generate_diff(f1, f2, format='stylish'):
     f1 = file_parser.parse_file(f1)
     f2 = file_parser.parse_file(f2)
     representation = builder.build_representation(f1, f2, format)
-    if format == 'stylish':
-        return stylish.stylish(representation)
+    if format == 'json':
+        return json.json_formatter(representation)
     elif format == 'plain':
         return plain.plain(representation)
+    else:
+        return stylish.stylish(representation)
 
     # result = ''
     # union_dict = dict(f1, **f2)
