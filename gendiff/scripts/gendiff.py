@@ -3,6 +3,7 @@ import argparse
 import gendiff.scripts.parser as file_parser
 import gendiff.scripts.builder as builder
 import gendiff.formatters.stylish as stylish
+import gendiff.formatters.plain as plain
 
 
 def main():
@@ -15,7 +16,7 @@ def main():
         '-f',
         '--format',
         type=str,
-        default='json',
+        default='stylish',
         help='set format of output'
     )
     args = parser.parse_args()
@@ -26,8 +27,11 @@ def generate_diff(f1, f2, format='stylish'):
 
     f1 = file_parser.parse_file(f1)
     f2 = file_parser.parse_file(f2)
-    representation = builder.build_representation(f1, f2)
-    return stylish.stylish(representation)
+    representation = builder.build_representation(f1, f2, format)
+    if format == 'stylish':
+        return stylish.stylish(representation)
+    elif format == 'plain':
+        return plain.plain(representation)
 
     # result = ''
     # union_dict = dict(f1, **f2)
