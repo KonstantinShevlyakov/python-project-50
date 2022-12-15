@@ -2,7 +2,7 @@
 import argparse
 import gendiff.scripts.parser as file_parser
 import gendiff.scripts.builder as builder
-import gendiff.scripts.stylish as stylish
+import gendiff.formatters.stylish as stylish
 
 
 def main():
@@ -19,10 +19,10 @@ def main():
         help='set format of output'
     )
     args = parser.parse_args()
-    print(generate_diff(args.first_file, args.second_file))
+    print(generate_diff(args.first_file, args.second_file, args.format))
 
 
-def generate_diff(f1, f2):
+def generate_diff(f1, f2, format='stylish'):
 
     f1 = file_parser.parse_file(f1)
     f2 = file_parser.parse_file(f2)
