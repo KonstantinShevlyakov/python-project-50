@@ -10,5 +10,5 @@
 ### Github Actions
 [![Github Actions Status](https://github.com/KonstantinShevlyakov/python-project-50/workflows/Python%20CI/badge.svg)](https://github.com/KonstantinShevlyakov/python-project-50/actions)
 
-### Diff between JSON's and YAML's demo
-[![asciicast](https://asciinema.org/a/D8BBSGolSaxwt4wW6O21lznlo.svg)](https://asciinema.org/a/D8BBSGolSaxwt4wW6O21lznlo)
+### Diff between JSON's  demo
+[![asciicast](https://asciinema.org/a/jb7M4S5fhu0E6B0K1YCvXsJSk.svg)](https://asciinema.org/a/jb7M4S5fhu0E6B0K1YCvXsJSk)
