@@ -36,22 +36,6 @@ def generate_diff(f1, f2, format='stylish'):
     else:
         return stylish.stylish(representation)
 
-    # result = ''
-    # union_dict = dict(f1, **f2)
-    # sorted_dict = sorted(union_dict, key=get_key)
-    # for k in sorted_dict:
-    #     if k in f1 and k in f2:
-    #         if f1[k] == f2[k]:
-    #             result += f'  {k}: {f1[k]}\n'
-    #         else:
-    #             result += f'- {k}: {f1[k]}\n'
-    #             result += f'+ {k}: {f2[k]}\n'
-    #     elif k in f1 and k not in f2:
-    #         result += f'- {k}: {f1[k]}\n'
-    #     elif k not in f1 and k in f2:
-    #         result += f'+ {k}: {f2[k]}\n'
-    # return '{\n' + result + '}'
-
 
 if __name__ == '__main__':
     main()
