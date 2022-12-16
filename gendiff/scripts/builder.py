@@ -16,7 +16,7 @@ def primitive_stringify(value, format):
         else:
             return str(value)
     elif format == 'plain':
-        if isinstance(value, dict):
+        if isinstance(value, dict) or type(value) is int:
             return value
         elif value is True:
             return 'true'

@@ -1,5 +1,5 @@
 import json
-from gendiff.scripts.gendiff import generate_diff
+from gendiff.scripts.generate_diff import generate_diff
 
 
 file_json1 = 'tests/fixtures/test_primitive_file1.json'
@@ -30,6 +30,7 @@ def test_generate_diff_nested_json():
 def test_generate_diff_nested_yaml():
     assert generate_diff(file_nested_yaml1, file_nested_yaml2) == nested_result
     
+
 def test_generate_diff_plain():
     assert generate_diff(file_nested_json1, file_nested_json2, 'plain') == plain_result
     assert generate_diff(file_nested_yaml1, file_nested_yaml2, 'plain') == plain_result
