@@ -60,7 +60,7 @@ def stylish(data, space_count=2):
                                  f'{k}: {data[k][1]}')
                     lines.append(
                         f'{current_tab}  + {k}: '
-                        f'{stringify_dict(data[k][1], deep_size)}'
+                        f'{stringify_dict(data[k][2], deep_size)}'
                     )
                 elif isinstance(data[k][1], dict) \
                         and isinstance(data[k][2], dict):
