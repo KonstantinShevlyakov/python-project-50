@@ -3,6 +3,7 @@
 Возможности утилиты:
 
 Поддержка разных входных форматов: yaml, json
+###
 Генерация отчета в виде plain text, stylish и json
 
 ### Hexlet tests and linter status:

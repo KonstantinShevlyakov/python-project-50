@@ -1,3 +1,4 @@
+import pytest
 from gendiff.scripts.generate_diff import generate_diff
 
 
@@ -14,22 +15,14 @@ nested_result = open('tests/fixtures/nested_result.txt', 'r').read()
 plain_result = open('tests/fixtures/plain_result.txt', 'r').read()
 
 
-def test_generate_diff_json():
-    assert generate_diff(file_json1, file_json2) == primitive_result
+@pytest.mark.parametrize('first_file', [file_json1, file_yaml1])
+@pytest.mark.parametrize('second_file', [file_json2, file_yaml2])
+def test_generate_diff_primitive(first_file, second_file):
+    assert generate_diff(first_file, second_file) == primitive_result
 
 
-def test_generate_diff_yaml():
-    assert generate_diff(file_yaml1, file_yaml2) == primitive_result
-
-
-def test_generate_diff_nested_json():
-    assert generate_diff(file_nested_json1, file_nested_json2) == nested_result
-
-
-def test_generate_diff_nested_yaml():
-    assert generate_diff(file_nested_yaml1, file_nested_yaml2) == nested_result
-
-
-def test_generate_diff_plain():
-    assert generate_diff(file_nested_json1, file_nested_json2, 'plain') == plain_result
-    assert generate_diff(file_nested_yaml1, file_nested_yaml2, 'plain') == plain_result
+@pytest.mark.parametrize('first_nested_file', [file_nested_json1, file_nested_yaml1])
+@pytest.mark.parametrize('second_nested_file', [file_nested_json2, file_nested_yaml2])
+def test_generate_diff_nested(first_nested_file, second_nested_file):
+    assert generate_diff(first_nested_file, second_nested_file) == nested_result
+    assert generate_diff(first_nested_file, second_nested_file, 'plain') == plain_result
