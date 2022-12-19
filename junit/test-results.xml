@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.033" timestamp="2022-12-01T20:17:41.038269" hostname="Konstantins-MacBook-Air.local"><testcase classname="tests.test_generate_diff" name="test_generate_diff" time="0.001" /></testsuite></testsuites>
