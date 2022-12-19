@@ -34,7 +34,7 @@ def stylish(data, space_count=2):
                 else:
                     lines.append(f'{current_tab}  + '
                                  f'{k}: {data[k][1]}')
-            elif data[k][0] == 'unchanged':
+            elif data[k][0] == 'removed':
                 if isinstance(data[k][1], dict):
                     lines.append(
                         f'{current_tab}  - {k}: '
@@ -43,10 +43,10 @@ def stylish(data, space_count=2):
                 else:
                     lines.append(f'{current_tab}  - '
                                  f'{k}: {data[k][1]}')
-            elif data[k][0] == 'saved':
+            elif data[k][0] == 'unchanged':
                 lines.append(f'{current_tab}    '
                              f'{k}: {data[k][1]}')
-            elif data[k][0] == 'two_values':
+            elif data[k][0] == 'changed':
                 if isinstance(data[k][1], dict) \
                         and not isinstance(data[k][2], dict):
                     lines.append(
@@ -74,7 +74,7 @@ def stylish(data, space_count=2):
                 else:
                     lines.append(f'{current_tab}  - {k}: {data[k][1]}')
                     lines.append(f'{current_tab}  + {k}: {data[k][2]}')
-            elif data[k][0] == 'changed':
+            elif data[k][0] == 'nested':
                 lines.append(f'{current_tab}    '
                              f'{k}: {iter_(data[k][1], deep_size + 2)}')
 

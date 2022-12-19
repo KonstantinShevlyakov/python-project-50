@@ -21,11 +21,11 @@ def plain(data):
                         f' was added with value: '
                         f'{data[k][1]}'
                     )
-            elif data[k][0] == 'unchanged':
+            elif data[k][0] == 'removed':
                 lines.append(
                     f'Property \'{current_path}{k}\' was removed'
                 )
-            elif data[k][0] == 'two_values':
+            elif data[k][0] == 'changed':
                 if isinstance(data[k][1], dict) \
                         and not isinstance(data[k][2], dict):
                     lines.append(
@@ -53,7 +53,7 @@ def plain(data):
                         f' was updated. From {data[k][1]} '
                         f'to {data[k][2]}'
                     )
-            elif data[k][0] == 'changed':
+            elif data[k][0] == 'nested':
                 lines.append(iter_(data[k][1], current_path + f'{k}.'))
 
             result = chain(lines)
