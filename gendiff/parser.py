@@ -2,18 +2,17 @@ import json
 import yaml
 
 
-def parse_file(filepath):
-    if filepath.endswith('.json'):
-        return json_parse(filepath)
-    elif filepath.endswith('.yaml') or filepath.endswith('.yml'):
-        return yaml_parse(filepath)
+def read_file(filepath):
+    return open(filepath, 'r')
 
 
-def json_parse(filepath):
-    return json.load(open(filepath))
+def get_extensions(filepath):
+    return filepath.split('.')[-1]
 
 
-def yaml_parse(filepath):
-    with open(filepath, 'r') as stream:
-        data = yaml.safe_load(stream)
-    return data
+def parse(data, ext):
+    if ext == 'json':
+        return json.load(data)
+    elif ext in ('yaml', 'yml'):
+        return yaml.safe_load(data)
+    raise TypeError
