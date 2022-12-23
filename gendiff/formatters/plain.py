@@ -1,6 +1,6 @@
 #!usr/bin/env python3
 from itertools import chain
-import gendiff.stringify as stringify
+import gendiff.formatters.stringify as stringify
 
 
 def plain(representation):

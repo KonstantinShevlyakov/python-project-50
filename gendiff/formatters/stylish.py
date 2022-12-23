@@ -1,6 +1,6 @@
 #!usr/bin/env python3
 from itertools import chain
-import gendiff.stringify as stringify
+import gendiff.formatters.stringify as stringify
 
 
 def stringify_dict(value, depth, space_count=2):
@@ -9,7 +9,6 @@ def stringify_dict(value, depth, space_count=2):
 
     deep_size = depth + space_count
     deep_tab = deep_size * ' '
-    # current_tab = depth * ' '
     lines = []
     for key, val in value.items():
         lines.append(f'{deep_tab}    {key}: '
@@ -23,7 +22,6 @@ def stylish(representation, space_count=2):
 
         lines = []
         deep_size = counter + space_count
-        # deep_tab = deep_size * ' '
         current_tab = counter * ' '
         for k in data:
             if data[k][0] == 'added':

@@ -1,26 +1,26 @@
 #!usr/bin/env python3
 
 def build_representation(old_data, new_data):
-    result = {}
+    diff = {}
     unique_keys = old_data.keys() | new_data.keys()
     sorted_keys = sorted(unique_keys, key=lambda x: x)
-    for k in sorted_keys:
-        if k in old_data.keys() and k not in new_data.keys():
-            result[k] = ('removed', old_data[k])
-        if k not in old_data.keys() and k in new_data.keys():
-            result[k] = ('added', new_data[k])
-        if k in old_data.keys() and k in new_data.keys():
-            if old_data[k] != new_data[k]:
-                if isinstance(old_data[k], dict) \
-                        and isinstance(new_data[k], dict):
-                    result[k] = (
+    for key in sorted_keys:
+        if key in old_data.keys() and key not in new_data.keys():
+            diff[key] = ('removed', old_data[key])
+        if key not in old_data.keys() and key in new_data.keys():
+            diff[key] = ('added', new_data[key])
+        if key in old_data.keys() and key in new_data.keys():
+            if old_data[key] != new_data[key]:
+                if isinstance(old_data[key], dict) \
+                        and isinstance(new_data[key], dict):
+                    diff[key] = (
                         'nested',
-                        build_representation(old_data[k], new_data[k])
+                        build_representation(old_data[key], new_data[key])
                     )
                 else:
-                    result[k] = ('changed',
-                                 old_data[k],
-                                 new_data[k])
+                    diff[key] = ('changed',
+                                 old_data[key],
+                                 new_data[key])
             else:
-                result[k] = ('unchanged', old_data[k])
-    return result
+                diff[key] = ('unchanged', old_data[key])
+    return diff
