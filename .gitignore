@@ -1,7 +1,7 @@
 .venv/
 /dist
 .idea/
-__pychache__
+__pycache__
 *.pyc
 .coverage/
 .pytest_cache/

@@ -1,4 +1,3 @@
-#!usr/bin/env python3
 from itertools import chain
 import gendiff.formatters.stringify as stringify
 
@@ -23,61 +22,66 @@ def stylish(representation, space_count=2):
         lines = []
         deep_size = counter + space_count
         current_tab = counter * ' '
-        for k in data:
-            if data[k][0] == 'added':
-                if isinstance(data[k][1], dict):
+        for key in data:
+            templates = {
+                'added': f'{current_tab}  + {key}: ',
+                'removed': f'{current_tab}  - {key}: ',
+                'unchanged': f'{current_tab}    {key}: '
+            }
+            if data[key][0] == 'added':
+                if isinstance(data[key][1], dict):
                     lines.append(
-                        f'{current_tab}  + {k}: '
-                        f'{stringify_dict(data[k][1], deep_size)}'
+                        f'{templates["added"]}'
+                        f'{stringify_dict(data[key][1], deep_size)}'
                     )
                 else:
-                    lines.append(f'{current_tab}  + '
-                                 f'{k}: {stringify.stringify(data[k][1])}')
-            elif data[k][0] == 'removed':
-                if isinstance(data[k][1], dict):
+                    lines.append(f'{templates["added"]}'
+                                 f'{stringify.stringify(data[key][1])}')
+            elif data[key][0] == 'removed':
+                if isinstance(data[key][1], dict):
                     lines.append(
-                        f'{current_tab}  - {k}: '
-                        f'{stringify_dict(data[k][1], deep_size)}'
+                        f'{templates["removed"]}'
+                        f'{stringify_dict(data[key][1], deep_size)}'
                     )
                 else:
-                    lines.append(f'{current_tab}  - '
-                                 f'{k}: {stringify.stringify(data[k][1])}')
-            elif data[k][0] == 'unchanged':
-                lines.append(f'{current_tab}    '
-                             f'{k}: {stringify.stringify(data[k][1])}')
-            elif data[k][0] == 'changed':
-                if isinstance(data[k][1], dict) \
-                        and not isinstance(data[k][2], dict):
+                    lines.append(f'{templates["removed"]}'
+                                 f'{stringify.stringify(data[key][1])}')
+            elif data[key][0] == 'unchanged':
+                lines.append(f'{templates["unchanged"]}'
+                             f'{stringify.stringify(data[key][1])}')
+            elif data[key][0] == 'changed':
+                if isinstance(data[key][1], dict) \
+                        and not isinstance(data[key][2], dict):
                     lines.append(
-                        f'{current_tab}  - '
-                        f'{k}: {stringify_dict(data[k][1], deep_size)}')
-                    lines.append(f'{current_tab}  + '
-                                 f'{k}: {stringify.stringify(data[k][2])}')
-                elif not isinstance(data[k][1], dict) \
-                        and isinstance(data[k][2], dict):
-                    lines.append(f'{current_tab}  - '
-                                 f'{k}: {stringify.stringify(data[k][1])}')
+                        f'{templates["removed"]}'
+                        f'{stringify_dict(data[key][1], deep_size)}')
+                    lines.append(f'{templates["added"]}'
+                                 f'{stringify.stringify(data[key][2])}')
+                elif not isinstance(data[key][1], dict) \
+                        and isinstance(data[key][2], dict):
+                    lines.append(f'{templates["removed"]}'
+                                 f'{stringify.stringify(data[key][1])}')
                     lines.append(
-                        f'{current_tab}  + {k}: '
-                        f'{stringify_dict(data[k][2], deep_size)}'
+                        f'{templates["added"]}'
+                        f'{stringify_dict(data[key][2], deep_size)}'
                     )
-                elif isinstance(data[k][1], dict) \
-                        and isinstance(data[k][2], dict):
+                elif isinstance(data[key][1], dict) \
+                        and isinstance(data[key][2], dict):
                     lines.append(
-                        f'{current_tab}  - '
-                        f'{k}: {stringify_dict(data[k][1], deep_size)}')
+                        f'{templates["removed"]}'
+                        f'{stringify_dict(data[key][1], deep_size)}')
                     lines.append(
-                        f'{current_tab}  + '
-                        f'{k}: {stringify_dict(data[k][1], deep_size)}'
+                        f'{templates["added"]}'
+                        f'{stringify_dict(data[key][1], deep_size)}'
                     )
                 else:
-                    lines.append(f'{current_tab}  - {k}: '
-                                 f'{stringify.stringify(data[k][1])}')
-                    lines.append(f'{current_tab}  + {k}: '
-                                 f'{stringify.stringify(data[k][2])}')
-            elif data[k][0] == 'nested':
-                lines.append(f'{current_tab}    '
-                             f'{k}: {iter_(data[k][1], deep_size + 2)}')
+                    lines.append(f'{templates["removed"]}'
+                                 f'{stringify.stringify(data[key][1])}')
+                    lines.append(f'{templates["added"]}'
+                                 f'{stringify.stringify(data[key][2])}')
+            elif data[key][0] == 'nested':
+                lines.append(f'{templates["unchanged"]}'
+                             f'{iter_(data[key][1], deep_size + 2)}')
 
             result = chain("{", lines, [current_tab + "}"])
         return '\n'.join(result)

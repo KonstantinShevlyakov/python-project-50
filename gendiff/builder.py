@@ -1,4 +1,3 @@
-#!usr/bin/env python3
 
 def build_representation(old_data, new_data):
     diff = {}

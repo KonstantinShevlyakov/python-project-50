@@ -1,8 +1,16 @@
-from gendiff.parser import parse, read_file, get_extensions
+from gendiff.parser import parse
 import gendiff.builder as builder
 import gendiff.formatters.stylish as stylish
 import gendiff.formatters.plain as plain
 import gendiff.formatters.json as json
+
+
+def read_file(filepath):
+    return open(filepath, 'r')
+
+
+def get_extensions(filepath):
+    return filepath.split('.')[-1]
 
 
 def generate_diff(first_file, second_file, formatter='stylish'):
