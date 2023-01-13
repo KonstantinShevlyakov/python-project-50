@@ -6,9 +6,9 @@ def build_representation(old_data, new_data):
     for key in sorted_keys:
         if key in old_data.keys() and key not in new_data.keys():
             diff[key] = ('removed', old_data[key])
-        if key not in old_data.keys() and key in new_data.keys():
+        elif key not in old_data.keys() and key in new_data.keys():
             diff[key] = ('added', new_data[key])
-        if key in old_data.keys() and key in new_data.keys():
+        elif key in old_data.keys() and key in new_data.keys():
             if old_data[key] != new_data[key]:
                 if isinstance(old_data[key], dict) \
                         and isinstance(new_data[key], dict):
